@@ -6,4 +6,4 @@ ledgerbook : api server
 - [x] Create Entity
 - [x] Create Repository
 - [x] Repository Test
-- [] Create Query Method
+- [ ] Create Query Method
