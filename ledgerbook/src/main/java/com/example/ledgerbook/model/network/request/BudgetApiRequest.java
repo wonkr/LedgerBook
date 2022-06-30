@@ -6,15 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class AccountApiRequest {
+public class BudgetApiRequest {
     private Long id;
+
     private String name;
-    private BigDecimal initialBalance;
-    private BigDecimal balance;
-    private String currency;
+    private BigDecimal amount;
+    private String period;
+    private LocalDate startAt;
 }

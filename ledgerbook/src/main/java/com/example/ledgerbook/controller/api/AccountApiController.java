@@ -26,18 +26,21 @@ public class AccountApiController implements CrudInterface<AccountApiRequest, Ac
     @Override
     @GetMapping("{id}")
     public Header<AccountApiResponse> read(@PathVariable(name="id") Long id) {
-        return null;
+        log.info("read id : {}", id);
+        return accountApiLogicService.read(id);
     }
 
     @Override
     @PutMapping("")
     public Header<AccountApiResponse> update(@RequestBody Header<AccountApiRequest> request) {
-        return null;
+        log.info("update: {}", request);
+        return accountApiLogicService.update(request);
     }
 
     @Override
     @DeleteMapping("{id}")
     public Header delete(@PathVariable(name="id") Long id) {
-        return null;
+        log.info("delete id : {}", id);
+        return accountApiLogicService.delete(id);
     }
 }

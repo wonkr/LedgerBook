@@ -9,6 +9,8 @@ import com.example.ledgerbook.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccountApiLogicService implements CrudInterface<AccountApiRequest, AccountApiResponse> {
 
@@ -34,17 +36,41 @@ public class AccountApiLogicService implements CrudInterface<AccountApiRequest, 
 
     @Override
     public Header<AccountApiResponse> read(Long id) {
-        return null;
+
+        return accountRepository.findById(id)
+                .map(user -> response(user))
+                .orElseGet(()->Header.ERROR("No Data with id : "+id));
+
     }
 
     @Override
     public Header<AccountApiResponse> update(Header<AccountApiRequest> request) {
-        return null;
+        AccountApiRequest accountApiRequest = request.getData();
+
+        Optional<Account> optional = accountRepository.findById(accountApiRequest.getId());
+
+        return optional.map(account -> {
+            account.setName(accountApiRequest.getName())
+                    .setBalance(accountApiRequest.getBalance())
+                    .setInitialBalance(accountApiRequest.getInitialBalance())
+                    .setCurrency(accountApiRequest.getCurrency());
+            return account;
+        })
+                .map(account -> accountRepository.save(account))
+                .map(updateAccount -> response(updateAccount))
+                .orElseGet(()->Header.ERROR("No data"));
+
     }
 
     @Override
     public Header delete(Long id) {
-        return null;
+        Optional<Account> optional = accountRepository.findById(id);
+
+        return optional.map(account -> {
+            accountRepository.delete(account);
+            return Header.OK();
+        })
+                .orElseGet(()-> Header.ERROR("No Data"));
     }
 
     private Header<AccountApiResponse> response(Account account){

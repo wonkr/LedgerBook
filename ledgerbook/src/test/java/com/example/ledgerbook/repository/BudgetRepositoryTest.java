@@ -42,4 +42,11 @@ public class BudgetRepositoryTest extends LedgerbookApplicationTests {
         });
 
     }
+
+    @Test
+    @Transactional
+    public void delete(){
+        budgetRepository.delete(budgetRepository.getReferenceById(2L));
+
+    }
 }

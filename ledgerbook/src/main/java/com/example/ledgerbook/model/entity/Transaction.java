@@ -1,9 +1,7 @@
 package com.example.ledgerbook.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,7 +10,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
-@ToString(exclude = {"account", "category"})
+@Builder
+@Accessors(chain = true)
+@ToString(exclude = {"account", "category", "subCategory"})
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +34,7 @@ public class Transaction {
 
     @ManyToOne
     private Category category;
+
+    @ManyToOne
+    private SubCategory subCategory;
 }

@@ -1,6 +1,7 @@
 package com.example.ledgerbook.model.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @ToString(exclude = {"transactionList"})
 @Builder
+@Accessors(chain = true)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

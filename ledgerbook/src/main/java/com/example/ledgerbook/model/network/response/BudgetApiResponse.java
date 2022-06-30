@@ -1,4 +1,4 @@
-package com.example.ledgerbook.model.network.request;
+package com.example.ledgerbook.model.network.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,15 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class AccountApiRequest {
+public class BudgetApiResponse {
+
     private Long id;
+
     private String name;
-    private BigDecimal initialBalance;
-    private BigDecimal balance;
-    private String currency;
+    private BigDecimal amount;
+    private String period;
+    private LocalDate startAt;
 }

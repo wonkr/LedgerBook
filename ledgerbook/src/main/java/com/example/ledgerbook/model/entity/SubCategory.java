@@ -12,8 +12,8 @@ import java.util.List;
 @Entity
 @Builder
 @Accessors(chain = true)
-@ToString(exclude = {"transactionList", "budget", "categoryList"})
-public class Category {
+@ToString(exclude = {"transactionList", "budget", "category"})
+public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +28,7 @@ public class Category {
     @OneToOne
     private Budget budget;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    private List<SubCategory> categoryList;
+    @ManyToOne
+    private Category category;
 
 }
